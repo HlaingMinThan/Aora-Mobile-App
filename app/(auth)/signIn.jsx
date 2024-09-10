@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { ScrollView, Text } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const SignIn = () => {
     return (
-        <View>
-            <Text>SignIn</Text>
-        </View>
+        <SafeAreaView className="bg-primary h-full" >
+            <ScrollView >
+                <Text className="text-white">hi</Text>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
 export default SignIn
 
- 

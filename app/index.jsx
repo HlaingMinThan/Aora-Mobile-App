@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '@/constants';
 import CustomButton from '@/components/CustomButton';
 import { StatusBar } from 'expo-status-bar';
+import { router } from 'expo-router';
 
 // https://www.nativewind.dev/quick-starts/expo
 const index = () => {
@@ -19,7 +20,7 @@ const index = () => {
                     </View>
                     <Text className="text-gray-100 text-center mt-7 text-sm font-pregular">Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with Aora</Text>
 
-                    <CustomButton title="Continue With Email" containerStyle="w-full mt-7" />
+                    <CustomButton title="Continue With Email" onPress={() => router.push('/signin')} containerStyle="w-full mt-7" />
                 </View>
             </ScrollView>
             <StatusBar backgroundColor='#161622' style="light" />
