@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 
+SplashScreen.preventAutoHideAsync();
 const _layout = () => {
     const [fontsLoaded, error] = useFonts({
         "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -19,7 +20,7 @@ const _layout = () => {
         if (error) throw error;
 
         if (fontsLoaded) {
-            // SplashScreen.hideAsync();
+            SplashScreen.hideAsync();
         }
     }, [fontsLoaded, error]);
 
