@@ -1,10 +1,14 @@
 import { StyleSheet } from 'react-native'
 import React from 'react'
-import { Slot } from 'expo-router'
+import { Stack } from 'expo-router'
 
 const _layout = () => {
     return (
-        <Slot />
+        <Stack>
+            <Stack.Screen
+                name="index" options={{ headerShown: false }}
+            />
+        </Stack>
     )
 }
 

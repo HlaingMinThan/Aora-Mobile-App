@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { Link } from 'expo-router'
 
 const index = () => {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>index</Text>
+            <Link href={'/profile'} style={{ color: "blue" }}>Profile</Link>
         </View>
     )
 }
