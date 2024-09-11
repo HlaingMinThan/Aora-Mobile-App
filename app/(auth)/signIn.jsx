@@ -4,7 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '@/constants';
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import axios from '@/lib/axios';
+import useAuthUser from '@/hooks/useAuthUser';
+import { deviceName } from 'expo-device';
+import { setItem } from 'expo-secure-store';
 
 const SignIn = () => {
     let [form, setForm] = useState({
@@ -13,9 +17,23 @@ const SignIn = () => {
     })
 
     let [isLoading, setIsLoading] = useState(false);
+    let { setUser, setIsLogin } = useAuthUser();
 
-    const submit = () => {
-        setIsLoading(true);
+    const submit = async () => {
+        try {
+            let res = await axios.post("/api/auth/login", { ...form, device_name: deviceName });
+            setIsLoading(true);
+            if (res.status === 200) {
+                setIsLoading(false);
+                setUser(res.data.user);
+                setIsLogin(true);
+                setItem("token", res.data);
+                router.push("/home");
+            }
+        } catch (e) {
+            setIsLoading(false);
+            console.log(e.response?.data)
+        }
     }
 
     return (

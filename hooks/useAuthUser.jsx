@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import { useEffect } from "react";
 
 const useAuthUser = () => {
-    let { user, isLogin } = useGlobalContext();
+    let { user, isLogin, setUser, setIsLogin } = useGlobalContext();
 
     useEffect(() => {
         if (user || isLogin) {
@@ -13,7 +13,9 @@ const useAuthUser = () => {
 
     return {
         user,
-        isLogin
+        isLogin,
+        setUser,
+        setIsLogin
     }
 }
 

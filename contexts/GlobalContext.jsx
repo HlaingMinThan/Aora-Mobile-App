@@ -28,7 +28,7 @@ const GlobalContextProvider = ({ children }) => {
     }, [])
 
     return (
-        <GlobalContext.Provider value={{ user, isLogin }}>
+        <GlobalContext.Provider value={{ user, isLogin, setUser, setIsLogin }}>
             {children}
         </GlobalContext.Provider>
     )
