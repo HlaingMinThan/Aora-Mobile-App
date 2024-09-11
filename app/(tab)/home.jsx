@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
 
 const home = () => {
     return (
         <View>
-            <Text>home</Text>
+            <Text>{process.env.EXPO_PUBLIC_APP_BACKEND}</Text>
         </View>
     )
 }

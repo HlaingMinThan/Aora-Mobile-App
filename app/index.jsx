@@ -5,9 +5,10 @@ import { images } from '@/constants';
 import CustomButton from '@/components/CustomButton';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
-
+import useAuthUser from '@/hooks/useAuthUser';
 // https://www.nativewind.dev/quick-starts/expo
-const index = () => {
+const Index = () => {
+    useAuthUser();//handle prevention
     return (
         <SafeAreaView className="bg-primary h-full" >
             <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -28,5 +29,5 @@ const index = () => {
     )
 }
 
-export default index
+export default Index
 

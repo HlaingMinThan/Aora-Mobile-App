@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import { GlobalContextProvider } from '@/contexts/GlobalContext';
 
 SplashScreen.preventAutoHideAsync();
 const _layout = () => {
@@ -29,11 +30,13 @@ const _layout = () => {
     }
 
     return (
-        <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="(auth)/signin" options={{ headerShown: false }} />
-            <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
-        </Stack>
+        <GlobalContextProvider>
+            <Stack>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="(auth)/signin" options={{ headerShown: false }} />
+                <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
+            </Stack>
+        </GlobalContextProvider>
     );
 };
 
