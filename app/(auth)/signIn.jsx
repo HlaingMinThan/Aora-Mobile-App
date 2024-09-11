@@ -28,7 +28,7 @@ const SignIn = () => {
                 setUser(res.data.user);
                 setIsLogin(true);
                 setItem("token", res.data);
-                router.push("/home");
+                router.replace("/home");
             }
         } catch (e) {
             setIsLoading(false);

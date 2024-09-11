@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import React from 'react'
 import CustomButton from '@/components/CustomButton';
 import { setItem } from 'expo-secure-store';
@@ -14,9 +14,9 @@ const Profile = () => {
         router.navigate("/");
     }
     return (
-        <View>
+        <SafeAreaView>
             <CustomButton title="logout" onPress={logout} />
-        </View>
+        </SafeAreaView>
     )
 }
 

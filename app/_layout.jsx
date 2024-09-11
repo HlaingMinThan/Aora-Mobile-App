@@ -35,6 +35,7 @@ const _layout = () => {
                 <Stack.Screen name="index" options={{ headerShown: false }} />
                 <Stack.Screen name="(auth)/signin" options={{ headerShown: false }} />
                 <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
+                <Stack.Screen name="(tab)" options={{ headerShown: false, gestureEnabled: false }} />
             </Stack>
         </GlobalContextProvider>
     );
