@@ -1,16 +1,40 @@
 import { FlatList, Image, SafeAreaView, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { images } from '@/constants';
 import SearchInput from '@/components/SearchInput';
 import Trending from '@/components/Trending';
 import EmptyState from '@/components/EmptyState';
+import VideoCard from '@/components/VideoCard';
 
-const home = () => {
+const Home = () => {
+    let [videos, setVideos] = useState([
+        {
+            id: 1,
+            title: "Video 1",
+            thumbnail: "https://picsum.photos/200/300",
+            video: images.video1,
+            creator: "Hlaing min than"
+        },
+        {
+            id: 2,
+            title: "Video 1",
+            thumbnail: "https://picsum.photos/200/300",
+            video: images.video1,
+            creator: "Hlaing min than"
+        },
+        {
+            id: 3,
+            title: "Video 1",
+            thumbnail: "https://picsum.photos/200/300",
+            video: images.video1,
+            creator: "Hlaing min than"
+        },
+    ]);
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
-                data={[{ id: 1 }, { id: 2 }]}
-                renderItem={({ item }) => <Text className="text-white">{item.id}</Text>}
+                data={videos}
+                renderItem={({ item }) => <VideoCard video={item} />}
                 ListHeaderComponent={
                     <View className="px-4 my-6">
                         <View className="flex-row justify-between items-center">
@@ -40,5 +64,5 @@ const home = () => {
     )
 }
 
-export default home
+export default Home
 
