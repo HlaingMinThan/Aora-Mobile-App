@@ -8,7 +8,7 @@ const VideoPlayer = ({ video }) => {
         <View className="justify-center items-center mt-3">
             <Video
                 source={{ uri: video }}
-                className="w-full h-72 rounded-xl border-[0.5px] border-gray-50"
+                className="w-full h-72 rounded-xl bg-black"
                 shouldPlay
                 useNativeControls
                 onLoad={() => setVideoLoading(false)}
