@@ -25,7 +25,7 @@ const TrendingItem = ({ video: { id, title, thumbnail }, activeItem }) => {
     return (play ?
         <Text className="text-white">Playing</Text> :
         <AnimatableView animation={id === activeItem ? zoomOut : zoomIn}>
-            <View className="w-52  mr-4" >
+            <View className="w-52  mr-3" >
                 <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => setPlay(true)}
