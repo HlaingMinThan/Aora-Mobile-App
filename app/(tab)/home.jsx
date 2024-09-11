@@ -12,21 +12,21 @@ const Home = () => {
             id: 1,
             title: "Video 1",
             thumbnail: "https://picsum.photos/200/300",
-            video: images.video1,
+            video: "https://d27v83ov1up738.cloudfront.net/courses/js-vue-firebase-combo-package/13-Chapter%2013/1-lesson-1%20creating%20our%20firebase%20project%20and%20connecting%20to%20our%20firebase%20project.mp4",
             creator: "Hlaing min than"
         },
         {
             id: 2,
             title: "Video 1",
             thumbnail: "https://picsum.photos/200/300",
-            video: images.video1,
+            video: "https://d27v83ov1up738.cloudfront.net/courses/js-vue-firebase-combo-package/13-Chapter%2013/1-lesson-1%20creating%20our%20firebase%20project%20and%20connecting%20to%20our%20firebase%20project.mp4",
             creator: "Hlaing min than"
         },
         {
             id: 3,
             title: "Video 1",
             thumbnail: "https://picsum.photos/200/300",
-            video: images.video1,
+            video: "https://d27v83ov1up738.cloudfront.net/courses/js-vue-firebase-combo-package/13-Chapter%2013/1-lesson-1%20creating%20our%20firebase%20project%20and%20connecting%20to%20our%20firebase%20project.mp4",
             creator: "Hlaing min than"
         },
     ]);

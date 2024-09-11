@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { icons } from '@/constants';
+import VideoPlayer from './VideoPlayer';
 
 const VideoCard = ({ video: { title, thumbnail, video, creator } }) => {
     let [play, setPlay] = useState(false);
@@ -24,7 +25,9 @@ const VideoCard = ({ video: { title, thumbnail, video, creator } }) => {
                     <Image source={icons.menu} className="w-5 h-5" resizeMode='contain' />
                 </View>
             </View>
-            {play ? <Text className="text-white">Playing</Text> : <TouchableOpacity
+            {play ? (
+                <VideoPlayer video={video} />
+            ) : <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => setPlay(true)}
                 className="relative justify-center items-center">
