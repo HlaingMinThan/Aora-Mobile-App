@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { icons } from '@/constants';
 import { View as AnimatableView } from 'react-native-animatable';
 
-const TrendingItem = ({ video: { id, title, thumbnail } }) => {
+const TrendingItem = ({ video: { id, title, thumbnail }, activeItem }) => {
     let [play, setPlay] = useState(false);
-    let [activeItem, setActiveItem] = useState(2);
+
     const zoomIn = {
         0: {
             scale: 1
