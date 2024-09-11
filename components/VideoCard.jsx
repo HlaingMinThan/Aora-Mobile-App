@@ -5,7 +5,7 @@ import { icons } from '@/constants';
 const VideoCard = ({ video: { title, thumbnail, video, creator } }) => {
     let [play, setPlay] = useState(false);
     return (
-        <View className="px-4 space-y-2 mb-14">
+        <View className="px-4 space-y-2 mb-12">
             <View className="flex-row  items-center justify-between">
                 <View className="flex-row space-x-3">
                     <View>

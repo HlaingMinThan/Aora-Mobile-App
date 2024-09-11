@@ -49,7 +49,7 @@ const Home = () => {
                         </View>
                         <View className="my-2 font-pregular">
                             <Trending
-                                posts={[{ id: 1 }, { id: 2 }] ?? []}
+                                videos={videos}
                             />
                         </View>
                     </View>

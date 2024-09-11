@@ -1,15 +1,15 @@
 import { Text, FlatList } from 'react-native'
 import React from 'react'
+import TrendingItem from './TrendingItem';
 
-const Trending = ({ posts }) => {
+const Trending = ({ videos }) => {
     return (
         <>
-            {posts.length && <Text className="text-gray-100 text-lg">Latest Videos</Text>}
+            {videos.length && <Text className="text-gray-100 text-lg mt-3">Trending Videos</Text>}
             <FlatList
                 horizontal
-                data={posts}
-                renderItem={({ item }) => <Text className="text-white">{item.id}</Text>}
-
+                data={videos}
+                renderItem={({ item }) => <TrendingItem video={item} />}
                 keyExtractor={(item) => item.id}
             />
         </>

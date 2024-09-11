@@ -9,7 +9,7 @@ const SearchInput = ({ value, onChangeText, placeHolder }) => {
     return (
         <View className="w-full h-16 border-2 border-black-200 bg-black-100 rounded-2xl focus:border-secondary">
             <TextInput
-                className="flex-1 text-white p-2 font-semibold text-base font-pregular"
+                className="flex-1 text-white p-4 font-semibold text-base font-pregular"
                 value={value}
                 placeholderTextColor={'#7b7b8b'}
                 placeholder={placeHolder}
