@@ -4,7 +4,7 @@ import { icons } from '@/constants';
 import { View as AnimatableView } from 'react-native-animatable';
 import { router } from 'expo-router';
 
-const TrendingItem = ({ item: { id, video, title, thumbnail }, activeItem }) => {
+const TrendingItem = ({ item: { id, video, title, thumbnail, creator, description }, activeItem }) => {
     const zoomIn = {
         0: {
             scale: 1
@@ -29,7 +29,7 @@ const TrendingItem = ({ item: { id, video, title, thumbnail }, activeItem }) => 
                     onPress={() => router.push({
                         pathname: "[video]",
                         params: {
-                            video: id
+                            video: JSON.stringify({ id, video, title, thumbnail, creator, description })
                         }
                     })}
                     className="relative justify-center items-center ">

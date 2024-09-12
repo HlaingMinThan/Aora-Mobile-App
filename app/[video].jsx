@@ -1,16 +1,15 @@
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native'
 import React from 'react'
 import VideoPlayer from '@/components/VideoPlayer';
-import { useVideo } from '@/hooks/useVideoData';
 import { useLocalSearchParams } from 'expo-router';
 
 const Video = () => {
-    let { video: id } = useLocalSearchParams();
-    let { video, isLoading } = useVideo(id);
+    let { video: videoObjString } = useLocalSearchParams();
+    let video = JSON.parse(videoObjString);
 
     return (
         <SafeAreaView className="bg-primary  h-full">
-            <VideoPlayer video={video?.video} isLoading={isLoading} />
+            <VideoPlayer video={video?.video} />
             <ScrollView>
                 <View className="flex-row  items-center justify-between my-3 p-3">
                     <View className="flex-row space-x-3">

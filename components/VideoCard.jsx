@@ -3,7 +3,7 @@ import React from 'react'
 import { icons } from '@/constants';
 import { router } from 'expo-router';
 
-const VideoCard = ({ video: { id, title, thumbnail, creator }, name }) => {
+const VideoCard = ({ video: { id, title, thumbnail, creator, video, description }, name }) => {
 
     return (
         <View className="px-4 space-y-2 mb-12 ">
@@ -40,7 +40,7 @@ const VideoCard = ({ video: { id, title, thumbnail, creator }, name }) => {
                 onPress={() => router.push({
                     pathname: "/[video]",
                     params: {
-                        video: id
+                        video: JSON.stringify({ id, title, thumbnail, creator, video, description })
                     }
                 })}
             >
