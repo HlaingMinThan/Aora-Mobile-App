@@ -25,6 +25,7 @@ const SearchInput = ({ initialSearch }) => {
                 placeholderTextColor={'#CDCDE0'}
                 placeholder={"seach for a video topic"}
                 onChangeText={setQuery}
+                onSubmitEditing={searchHandler}
             />
 
             <TouchableOpacity className="absolute right-3 top-4" onPress={searchHandler}>

@@ -43,7 +43,7 @@ const SignIn = () => {
                     <Image source={images.logo} className="w-[115px] h-[35px]" resizeMode='contain' />
                     <Text className="text-2xl mt-10 font-semibold text-white">Login To Aora</Text>
                     <FormField title="Email" value={form.email} onChangeText={e => setForm({ ...form, email: e })} otherStyles="mt-7" keyboardType="text" />
-                    <FormField title="Password" value={form.password} onChangeText={e => setForm({ ...form, password: e })} otherStyles="mt-7" keyboardType="password" />
+                    <FormField title="Password" value={form.password} onChangeText={e => setForm({ ...form, password: e })} otherStyles="mt-7" keyboardType="password" onSubmitEditing={submit} />
                     <CustomButton isLoading={isLoading} title="Sign In" onPress={submit} containerStyle="w-full mt-7" />
                     <View className="mt-4 flex-row items-center justify-center">
                         <Text className="text-gray-100 text-lg text-center">Don't Have An Account ?</Text>

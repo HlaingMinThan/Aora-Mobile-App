@@ -1,4 +1,4 @@
-import { FlatList, Image, RefreshControl, SafeAreaView, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Image, RefreshControl, SafeAreaView, Text, View } from 'react-native'
 import React from 'react'
 import { images } from '@/constants';
 import SearchInput from '@/components/SearchInput';
@@ -13,7 +13,7 @@ const Home = () => {
 
     return (
         <SafeAreaView className="bg-primary h-full">
-            <FlatList
+            {!isLoading ? (<FlatList
                 keyExtractor={(item) => item.id}
                 data={videos}
                 renderItem={({ item }) => <VideoCard video={item} />}
@@ -42,7 +42,9 @@ const Home = () => {
                     </View>
                 }
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={getVideos} tintColor={"#CDCDE0"} />}
-            />
+            />) : (
+                <ActivityIndicator className="mt-3" />
+            )}
         </SafeAreaView>
     )
 }
