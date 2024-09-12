@@ -3,16 +3,16 @@ import React from 'react'
 import { icons } from '@/constants';
 import { router } from 'expo-router';
 
-const VideoCard = ({ video: { id, title, thumbnail, video, creator } }) => {
+const VideoCard = ({ video: { id, title, thumbnail, creator }, name }) => {
 
     return (
         <View className="px-4 space-y-2 mb-12 ">
             <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => router.push({
-                    pathname: "/[video]",
+                    pathname: "/users/[userId]",
                     params: {
-                        video: id
+                        userId: creator.id
                     }
                 })}
             >
@@ -27,13 +27,23 @@ const VideoCard = ({ video: { id, title, thumbnail, video, creator } }) => {
                         </View>
                         <View className=" w-[80%]">
                             <Text className="font-bold  text-xl text-white">{title}</Text>
-                            <Text className="font-bold  text-gray-100 text-sm">{creator.name}</Text>
+                            <Text className="font-bold  text-gray-100 text-sm">{name || creator?.name}</Text>
                         </View>
                     </View>
                     <View className="justify-start h-[60px]">
                         <Image source={icons.menu} className="w-5 h-5" resizeMode='contain' />
                     </View>
                 </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => router.push({
+                    pathname: "/[video]",
+                    params: {
+                        video: id
+                    }
+                })}
+            >
                 <View className="relative justify-center items-center">
                     <Image
                         source={{ uri: thumbnail }}

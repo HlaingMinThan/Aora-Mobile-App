@@ -1,22 +1,23 @@
-import { SafeAreaView } from 'react-native'
-import React from 'react'
-import CustomButton from '@/components/CustomButton';
+import { router } from 'expo-router';
 import { setItem } from 'expo-secure-store';
 import useAuthUser from '@/hooks/useAuthUser';
-import { router } from 'expo-router';
+import ReusableProfile from '@/components/ReusableProfile';
+import { useAllVideos } from '@/hooks/useVideoData';
 
 const Profile = () => {
-    let { setUser, setIsLogin } = useAuthUser()
+
+    let { setUser, setIsLogin, user } = useAuthUser()
+    let { videos, getVideos, isLoading } = useAllVideos();
+
     let logout = () => {
         setItem("token", "");
         setUser(null);
         setIsLogin(false);
         router.navigate("/");
     }
+
     return (
-        <SafeAreaView>
-            <CustomButton title="logout" onPress={logout} />
-        </SafeAreaView>
+        <ReusableProfile handleLogout={logout} user={user} isLoading={isLoading} videos={videos} refreshVideos={getVideos} />
     )
 }
 

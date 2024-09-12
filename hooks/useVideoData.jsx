@@ -1,26 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import axios from '@/lib/axios'
 
-let useAllVideos = (query = "") => {
-    let [isLoading, setIsLoading] = useState(false);
+let useAllVideos = (query = "", userId) => {
     let [videos, setVideos] = useState([]);
 
-    let getVideos = async (q = "") => {
-        setIsLoading(true);
-        console.log(q)
-        let res = await axios.get(`/api/videos${q ? '?query=' + q : ''}`);
+    let [isLoading, setIsLoading] = useState(videos.length ? false : true);
+
+    let getVideos = useCallback(async () => {
+        let url;
+        if (userId) {
+            url = `/api/users/${userId}/videos`;
+        } else {
+            url = `/api/videos${query ? '?query=' + query : ''}`;
+        }
+
+        let res = await axios.get(url);
         let videos = res.data.data;
-        console.log(videos.length)
-        // eslint-disable-next-line no-undef
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        setIsLoading(false);
         setVideos(videos);
-    }
+    }, [query, userId]);
 
     useEffect(() => {
-        getVideos(query)
-    }, [query]);
+        getVideos()
+    }, [getVideos, query, userId]);
+
 
     return { videos, getVideos, isLoading };
 }

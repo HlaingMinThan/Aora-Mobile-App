@@ -1,15 +1,27 @@
 import { ActivityIndicator, FlatList, Image, RefreshControl, SafeAreaView, Text, View } from 'react-native'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { images } from '@/constants';
 import SearchInput from '@/components/SearchInput';
 import Trending from '@/components/Trending';
 import EmptyState from '@/components/EmptyState';
 import VideoCard from '@/components/VideoCard';
 import { useAllVideos } from '@/hooks/useVideoData';
+import axios from '@/lib/axios'
 
 const Home = () => {
-
     let { videos, getVideos, isLoading } = useAllVideos();
+    let [trendingVideos, setTrendingVideos] = useState([]);
+    // let { trendingVideos } = useTrendings();
+
+    let getTrendings = useCallback(async () => {
+        let res = await axios.get(`/api/videos/trending`);
+        let videos = res.data.data;
+        setTrendingVideos(videos);
+    }, []);
+
+    useEffect(() => {
+        getTrendings();
+    }, [getTrendings])
 
     return (
         <SafeAreaView className="bg-primary h-full">
@@ -31,7 +43,7 @@ const Home = () => {
                         </View>
                         <View className="my-2 font-pregular">
                             <Trending
-                                videos={videos}
+                                videos={trendingVideos}
                             />
                         </View>
                     </View>

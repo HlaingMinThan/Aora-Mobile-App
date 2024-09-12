@@ -14,6 +14,8 @@ const GlobalContextProvider = ({ children }) => {
             let res = await axios.get('/api/auth/user');
             if (res.status === 200) {
                 setUser(res.data)
+                setIsLogin(true);
+                router.replace('/home')
             }
         } catch (e) {
             if (e.status === 401) {
