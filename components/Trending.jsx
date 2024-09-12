@@ -14,11 +14,11 @@ const Trending = ({ videos }) => {
 
     return (
         <>
-            {videos.length && <Text className="text-gray-100 text-lg mt-3">Trending Videos</Text>}
+            {!!videos?.length && <Text className="text-gray-100 text-lg mt-3">Trending Videos</Text>}
             <FlatList
                 horizontal
                 data={videos}
-                renderItem={({ item }) => <TrendingItem video={item} activeItem={activeItem} />}
+                renderItem={({ item }) => <TrendingItem item={item} activeItem={activeItem} />}
                 snapToAlignment="center"  // Snap to center
                 snapToInterval={itemWidth} // Adjust interval based on item width
                 keyExtractor={(item) => item.id}

@@ -1,38 +1,20 @@
-import { FlatList, Image, SafeAreaView, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { FlatList, Image, RefreshControl, SafeAreaView, Text, View } from 'react-native'
+import React from 'react'
 import { images } from '@/constants';
 import SearchInput from '@/components/SearchInput';
 import Trending from '@/components/Trending';
 import EmptyState from '@/components/EmptyState';
 import VideoCard from '@/components/VideoCard';
+import { useAllVideos } from '@/hooks/useVideoData';
 
 const Home = () => {
-    let [videos, setVideos] = useState([
-        {
-            id: 1,
-            title: "Video 1",
-            thumbnail: "https://picsum.photos/200/300",
-            video: "https://d27v83ov1up738.cloudfront.net/courses/js-vue-firebase-combo-package/13-Chapter%2013/1-lesson-1%20creating%20our%20firebase%20project%20and%20connecting%20to%20our%20firebase%20project.mp4",
-            creator: "Hlaing min than"
-        },
-        {
-            id: 2,
-            title: "Video 1",
-            thumbnail: "https://picsum.photos/200/300",
-            video: "https://d27v83ov1up738.cloudfront.net/courses/js-vue-firebase-combo-package/13-Chapter%2013/1-lesson-1%20creating%20our%20firebase%20project%20and%20connecting%20to%20our%20firebase%20project.mp4",
-            creator: "Hlaing min than"
-        },
-        {
-            id: 3,
-            title: "Video 1",
-            thumbnail: "https://picsum.photos/200/300",
-            video: "https://d27v83ov1up738.cloudfront.net/courses/js-vue-firebase-combo-package/13-Chapter%2013/1-lesson-1%20creating%20our%20firebase%20project%20and%20connecting%20to%20our%20firebase%20project.mp4",
-            creator: "Hlaing min than"
-        },
-    ]);
+
+    let { videos, getVideos, isLoading } = useAllVideos();
+
     return (
         <SafeAreaView className="bg-primary h-full">
             <FlatList
+                keyExtractor={(item) => item.id}
                 data={videos}
                 renderItem={({ item }) => <VideoCard video={item} />}
                 ListHeaderComponent={
@@ -45,7 +27,7 @@ const Home = () => {
                             <Image source={images.logoSmall} resizeMode='contain' className="w-9 h-10" />
                         </View>
                         <View className="mt-10">
-                            <SearchInput placeHolder="seach for a video topic" />
+                            <SearchInput />
                         </View>
                         <View className="my-2 font-pregular">
                             <Trending
@@ -59,6 +41,7 @@ const Home = () => {
                         <EmptyState title="No Videos Found" subtitle="Be the first one to upload the video" />
                     </View>
                 }
+                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={getVideos} tintColor={"#CDCDE0"} />}
             />
         </SafeAreaView>
     )

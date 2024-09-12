@@ -1,9 +1,14 @@
 import { View, ActivityIndicator } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ResizeMode, Video } from 'expo-av'
 
-const VideoPlayer = ({ video }) => {
+const VideoPlayer = ({ video, isLoading }) => {
     let [videoLoading, setVideoLoading] = useState(true);
+    useEffect(() => {
+        if (isLoading) {
+            setVideoLoading(true)
+        }
+    }, [isLoading])
     return (
         <View className="justify-center items-center mt-3">
             <Video

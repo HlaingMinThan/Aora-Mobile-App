@@ -1,10 +1,9 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { icons } from '@/constants';
-import VideoPlayer from './VideoPlayer';
 import { router } from 'expo-router';
 
-const VideoCard = ({ video: { title, thumbnail, video, creator } }) => {
+const VideoCard = ({ video: { id, title, thumbnail, video, creator } }) => {
     let [play, setPlay] = useState(false);
     return (
         <View className="px-4 space-y-2 mb-12">
@@ -19,7 +18,7 @@ const VideoCard = ({ video: { title, thumbnail, video, creator } }) => {
                     </View>
                     <View>
                         <Text className="font-bold  text-xl text-white">{title}</Text>
-                        <Text className="font-bold  text-gray-100 text-sm">{creator}</Text>
+                        <Text className="font-bold  text-gray-100 text-sm">{creator.name}</Text>
                     </View>
                 </View>
                 <View className="justify-start h-[50px]">
@@ -31,7 +30,7 @@ const VideoCard = ({ video: { title, thumbnail, video, creator } }) => {
                 onPress={() => router.push({
                     pathname: "/[video]",
                     params: {
-                        video: video
+                        video: id
                     }
                 })}
                 className="relative justify-center items-center">

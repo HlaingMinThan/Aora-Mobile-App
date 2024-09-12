@@ -21,7 +21,7 @@ const Index = () => {
                     </View>
                     <Text className="text-gray-100 text-center mt-7 text-sm font-pregular">Where Creativity Meets Innovation: Embark on a Journey of Limitless Exploration with Aora</Text>
 
-                    <CustomButton title="Continue With Email" onPress={() => router.push('/home')} containerStyle="w-full mt-7" />
+                    <CustomButton title="Continue With Email" onPress={() => router.push('/signin')} containerStyle="w-full mt-7" />
                 </View>
             </ScrollView>
             <StatusBar backgroundColor='#161622' style="light" />
