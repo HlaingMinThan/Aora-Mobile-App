@@ -23,7 +23,7 @@ const Video = () => {
                         </View>
                         <View>
                             <Text className="font-bold  text-xl text-white">{video?.title}</Text>
-                            <Text className="font-bold  text-gray-100 text-sm">Hlaing min than</Text>
+                            <Text className="font-bold  text-gray-100 text-sm">{video?.creator?.name}</Text>
                         </View>
                     </View>
                 </View>

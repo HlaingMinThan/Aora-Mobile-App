@@ -9,7 +9,7 @@ const EmptyState = ({ title, subtitle }) => {
         <View className="justify-center items-center px-4">
             <Image source={images.empty} className="w-[270px] h-[200px]" resizeMode='contain' />
             <Text className="text-white font-bold text-2xl">{title}</Text>
-            <Text className="text-gray-100">{subtitle}</Text>
+            <Text className="text-gray-100 mt-3">{subtitle}</Text>
             <CustomButton title="Create Video" onPress={() => router.push('/create')} containerStyle="w-full my-5" />
         </View>
     )

@@ -32,7 +32,7 @@ const Search = () => {
                 }
                 ListEmptyComponent={
                     <View className="justify-center h-[50vh]">
-                        <EmptyState title="No Videos Found" subtitle="Be the first one to upload the video" />
+                        <EmptyState title="No Videos Found" subtitle="No search results found for this search query" />
                     </View>
                 }
             />
