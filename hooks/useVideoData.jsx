@@ -5,10 +5,10 @@ let useAllVideos = (query = "") => {
     let [isLoading, setIsLoading] = useState(false);
     let [videos, setVideos] = useState([]);
 
-    let getVideos = async (q) => {
+    let getVideos = async (q = "") => {
         setIsLoading(true);
         console.log(q)
-        let res = await axios.get('/api/videos?query=' + q);
+        let res = await axios.get(`/api/videos${q ? '?query=' + q : ''}`);
         let videos = res.data.data;
         console.log(videos.length)
         // eslint-disable-next-line no-undef
