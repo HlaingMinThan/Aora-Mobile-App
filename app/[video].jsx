@@ -22,14 +22,14 @@ const Video = () => {
                             />
                         </View>
                         <View>
-                            <Text className="font-bold  text-xl text-white">This is title</Text>
+                            <Text className="font-bold  text-xl text-white">{video?.title}</Text>
                             <Text className="font-bold  text-gray-100 text-sm">Hlaing min than</Text>
                         </View>
                     </View>
                 </View>
 
                 <Text className="text-white my-3 px-4" >
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla dolorem ipsa vel harum accusantium voluptatum atque, expedita non enim reprehenderit in repellat veniam velit error sunt consequuntur, a fugiat cum.
+                    {video?.description}
                 </Text>
             </ScrollView>
         </SafeAreaView>

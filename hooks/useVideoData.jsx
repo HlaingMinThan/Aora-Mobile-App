@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import axios from '@/lib/axios'
 
-let useAllVideos = () => {
+let useAllVideos = (query = "") => {
     let [isLoading, setIsLoading] = useState(false);
     let [videos, setVideos] = useState([]);
 
-    let getVideos = async () => {
+    let getVideos = async (q) => {
         setIsLoading(true);
-        let res = await axios.get('/api/videos');
+        console.log(q)
+        let res = await axios.get('/api/videos?query=' + q);
         let videos = res.data.data;
+        console.log(videos.length)
+        // eslint-disable-next-line no-undef
         setTimeout(() => {
             setIsLoading(false);
         }, 2000);
@@ -16,8 +19,8 @@ let useAllVideos = () => {
     }
 
     useEffect(() => {
-        getVideos()
-    }, []);
+        getVideos(query)
+    }, [query]);
 
     return { videos, getVideos, isLoading };
 }
