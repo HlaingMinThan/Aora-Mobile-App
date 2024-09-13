@@ -10,7 +10,7 @@ const VideoPlayer = ({ video, isLoading }) => {
         }
     }, [isLoading])
     return (
-        <View className="justify-center items-center mt-3">
+        <View className="justify-center items-center ">
             <Video
                 source={{ uri: video }}
                 className="w-full h-72 rounded-xl bg-black"

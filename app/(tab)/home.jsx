@@ -36,7 +36,7 @@ const Home = () => {
                         <View className="flex-row justify-between items-center">
                             <View className="space-y-2">
                                 <Text className="text-gray-100">Welcome back </Text>
-                                <Text className="text-white font-bold text-3xl">{user.name}</Text>
+                                <Text className="text-white font-bold text-3xl">{user?.name}</Text>
                             </View>
                             <Image source={images.logoSmall} resizeMode='contain' className="w-9 h-10" />
                         </View>
