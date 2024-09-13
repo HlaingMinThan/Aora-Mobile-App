@@ -7,10 +7,12 @@ import EmptyState from '@/components/EmptyState';
 import VideoCard from '@/components/VideoCard';
 import { useAllVideos } from '@/hooks/useVideoData';
 import axios from '@/lib/axios'
+import useAuthUser from '@/hooks/useAuthUser';
 
 const Home = () => {
     let { videos, getVideos, isLoading } = useAllVideos();
     let [trendingVideos, setTrendingVideos] = useState([]);
+    let { user } = useAuthUser();
     // let { trendingVideos } = useTrendings();
 
     let getTrendings = useCallback(async () => {
@@ -34,7 +36,7 @@ const Home = () => {
                         <View className="flex-row justify-between items-center">
                             <View className="space-y-2">
                                 <Text className="text-gray-100">Welcome back </Text>
-                                <Text className="text-white font-bold text-3xl">Hlaing min than</Text>
+                                <Text className="text-white font-bold text-3xl">{user.name}</Text>
                             </View>
                             <Image source={images.logoSmall} resizeMode='contain' className="w-9 h-10" />
                         </View>

@@ -17,17 +17,17 @@ const ReusableProfile = ({ handleLogout = null, user, isLoading, videos, refresh
                 data={videos}
                 renderItem={({ item }) => <VideoCard video={item} name={user?.name} />}
                 ListHeaderComponent={
-                    <View className={`w-full justify-center items-center mb-6  px-4 ${state.type === 'stack' ? 'space-y-10 mt-20' : ''}`}>
+                    <View className={`w-full justify-center items-center mb-6  px-4 ${state.type === 'stack' ? 'space-y-10 mt-16' : ''}`}>
                         {(state.type === 'tab' && authUser?.id === user?.id) && <TouchableOpacity onPress={handleLogout} className="items-end w-full mb-10">
                             <Image source={icons.logout} className="w-6 h-6" resizeMode='contain' />
                         </TouchableOpacity>}
-                        <View className="w-24 h-24  rounded-lg  justify-center items-center space-y-3">
+                        <View className="w-32 h-32  rounded-lg  justify-center items-center space-y-3">
                             <Image
                                 source={{ uri: 'https://i.pravatar.cc/300' }}
                                 className="w-24 h-24 border-2 rounded-lg border-secondary"
                                 resizeMode='cover'
                             />
-                            <Text className="text-white font-bold text-lg">{user?.name}</Text>
+                            <Text className="text-white text-center font-bold text-lg">{user?.name}</Text>
                         </View>
                         <View className="flex-row justify-center items-center space-x-10 mt-5">
                             <View className="items-center">
