@@ -4,6 +4,7 @@ import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 import { icons } from '@/constants';
 import * as ImagePicker from 'expo-image-picker';
+import ImagePreview from '@/components/ImagePreview';
 
 
 const Create = () => {
@@ -12,6 +13,8 @@ const Create = () => {
         video: "",
         thumbnail: ''
     });
+
+
 
     const [image, setImage] = useState(null);
 
@@ -45,9 +48,7 @@ const Create = () => {
                 <View className="mt-7 juce">
                     <Text className="text-base text-gray-100 font-pmedium">Upload Thumbnail</Text>
                     {image ? (
-                        <View>
-                            <Image source={{ uri: image.uri }} className="w-full h-40 rounded-2xl mt-2 bg-black-100 justify-center items-center" />
-                        </View>
+                        <ImagePreview images={[image]} />
                     ) : (<TouchableOpacity onPress={pickImageAsync}>
                         <View className="w-full h-20 rounded-2xl mt-2 bg-black-100 justify-center items-center">
                             <Image source={icons.upload} className="w-6 h-6" resizeMode='contain' />
