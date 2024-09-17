@@ -28,6 +28,12 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4dc8f2e4-ce24-4a30-8138-898053ee62f7"
+      }
+    },
+    "owner": "hlaingminthan"
   }
 }
