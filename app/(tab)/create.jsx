@@ -8,10 +8,13 @@ import ImagePreview from '@/components/ImagePreview';
 import axios from '@/lib/axios';
 import VideoPlayer from '@/components/VideoPlayer';
 import { router } from 'expo-router';
+import Modal from "react-native-modal";
+
 
 
 const Create = () => {
     const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(true);
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
 
@@ -68,7 +71,7 @@ const Create = () => {
     let Upload = async () => {
         try {
             if (!form.title || !form.description || !form.thumbnail) {
-                Alert.alert('Error', 'Please fill all the fields');
+                setShowModal(true)
             }
             setLoading(true);
             let res = await axios.post('/api/videos', form);
@@ -98,6 +101,12 @@ const Create = () => {
     return (
         <SafeAreaView className="bg-primary h-full">
             <ScrollView className="px-4">
+                <Modal isVisible={showModal} onBackdropPress={() => setShowModal(false)}>
+                    <View className="justify-center items-center min-h-24 p-4 bg-gray-50 rounded-xl">
+                        <Text className="text-center text-lg font-bold">Please Fill All The Fields</Text>
+                        <Text className="text-center text-sm mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde provident adipisci ipsam numquam facilis consequuntur, molestiae laudantium dolore eligendi, esse aperiam qui aliquid asperiores perferendis tempora expedita mollitia hic doloremque.</Text>
+                    </View>
+                </Modal>
                 <Text className="mt-4 text-white font-bold text-2xl">Upload Video</Text>
                 <View className="mt-2">
                     <FormField title="Video Title" value={form.title} onChangeText={e => setForm({ ...form, title: e })} otherStyles="mt-7" keyboardType="text" placeHolder="type your video title" />
