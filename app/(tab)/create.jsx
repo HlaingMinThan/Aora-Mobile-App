@@ -49,21 +49,27 @@ const Create = () => {
     }
 
     const pickMediaAsync = async (type) => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
-            quality: 1,
-            mediaTypes: type === 'image' ? ImagePicker.MediaTypeOptions.Images : ImagePicker.MediaTypeOptions.Videos
-        });
-        let file = result.assets[0];
-        if (type === 'image') {
-            setImage(file);
-        }
-        if (type === 'video') {
-            setVideo(file);
-        }
-        let uri = await storeFile(file);
-        if (uri) {
-            setForm(prev => ({ ...prev, thumbnail: uri }))
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                quality: 1,
+                mediaTypes: type === 'image' ? ImagePicker.MediaTypeOptions.Images : ImagePicker.MediaTypeOptions.Videos
+            });
+            let file = result.assets[0];
+            if (type === 'image') {
+                setImage(file);
+            }
+            if (type === 'video') {
+                setVideo(file);
+            }
+            let uri = await storeFile(file);
+            if (uri) {
+                setForm(prev => ({ ...prev, thumbnail: uri }))
+            }
+        } catch (e) {
+            setImage(null);
+            setVideo(null);
+            console.log('error on pickMediaAsync', e)
         }
     }
 
