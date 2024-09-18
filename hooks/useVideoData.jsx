@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import axios from '@/lib/axios'
 
-let useAllVideos = (query = "", userId) => {
+let useAllVideos = (query = "", userId, getBookMark = false) => {
     let [videos, setVideos] = useState([]);
 
     let [isLoading, setIsLoading] = useState(videos.length ? false : true);
@@ -9,7 +9,11 @@ let useAllVideos = (query = "", userId) => {
     let getVideos = useCallback(async () => {
         let url;
         if (userId) {
-            url = `/api/users/${userId}/videos`;
+            if (getBookMark) {
+                url = `/api/users/${userId}/bookmarks`;//user bookmarked videos
+            } else {
+                url = `/api/users/${userId}/videos`;//user created videos
+            }
         } else {
             url = `/api/videos${query ? '?query=' + query : ''}`;
         }
@@ -18,7 +22,7 @@ let useAllVideos = (query = "", userId) => {
         let videos = res.data.data;
         setIsLoading(false);
         setVideos(videos);
-    }, [query, userId]);
+    }, [query, userId, getBookMark]);
 
     useEffect(() => {
         getVideos()

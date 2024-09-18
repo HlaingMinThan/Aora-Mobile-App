@@ -8,6 +8,7 @@ import { Link, router } from 'expo-router';
 import axios from '@/lib/axios';
 import * as Device from 'expo-device';
 import { setItem } from 'expo-secure-store';
+import useAuthUser from '@/hooks/useAuthUser';
 
 const SignUp = () => {
     let [form, setForm] = useState({
@@ -15,7 +16,7 @@ const SignUp = () => {
         email: "",
         password: ""
     })
-
+    let { setIsLogin } = useAuthUser();
     let [isLoading, setIsLoading] = useState(false);
 
     const submit = async () => {
@@ -26,7 +27,7 @@ const SignUp = () => {
             setIsLoading(true);
             let device_name = Device.deviceName;
 
-            let res = await axios.post(process.env.EXPO_PUBLIC_APP_BACKEND + "/api/auth/register", {
+            let res = await axios.post("/api/auth/register", {
                 name: form.username,
                 email: form.email,
                 password: form.password,
@@ -34,6 +35,7 @@ const SignUp = () => {
             })
 
             setItem("token", res.data)
+            setIsLogin(true);
             if (res.status === 200) {
                 setIsLoading(false);
                 router.push("/home");

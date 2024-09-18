@@ -1,11 +1,39 @@
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import VideoPlayer from '@/components/VideoPlayer';
-import { useLocalSearchParams } from 'expo-router';
+import CustomButton from '@/components/CustomButton';
+import { router, useLocalSearchParams } from 'expo-router';
+import axios from '@/lib/axios';
 
 const Video = () => {
     let { video: videoObjString } = useLocalSearchParams();
     let video = JSON.parse(videoObjString);
+    let [loading, setLoading] = useState(false);
+    let [alreadyBookmarked, setAlreadyBookmarked] = useState(false);
+
+    useEffect(() => {
+        if (video) {
+            axios.get(`/api/videos/${video?.id}/check-bookmark`).then(res => {
+                setAlreadyBookmarked(res.data.data);
+            }).catch((e) => {
+                console.log(e)
+            });
+        }
+    }, [video])
+
+    let addToBookmark = async () => {
+        try {
+            setLoading(true);
+            let res = await axios.post(`/api/videos/${video?.id}/toggle-bookmarks`);
+            if (res.status === 200) {
+                router.navigate('/bookmark');
+            }
+            setLoading(false);
+        } catch (e) {
+            console.log(e)
+            setLoading(false);
+        }
+    }
 
     return (
         <SafeAreaView className="bg-primary  h-full">
@@ -30,6 +58,8 @@ const Video = () => {
                 <Text className="text-white my-3 px-4" >
                     {video?.description}
                 </Text>
+
+                <CustomButton title={`${alreadyBookmarked ? 'Remove From' : 'Add To'} Bookmark`} onPress={addToBookmark} isLoading={loading} />
             </ScrollView>
         </SafeAreaView>
     )

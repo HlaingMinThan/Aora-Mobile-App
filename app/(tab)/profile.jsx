@@ -7,7 +7,7 @@ import { useAllVideos } from '@/hooks/useVideoData';
 const Profile = () => {
 
     let { setUser, setIsLogin, user } = useAuthUser()
-    let { videos, getVideos, isLoading } = useAllVideos();
+    let { videos, getVideos, isLoading } = useAllVideos("", user?.id);
 
     let logout = () => {
         //call logout api to delete token

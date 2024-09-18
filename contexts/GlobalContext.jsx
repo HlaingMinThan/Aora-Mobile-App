@@ -12,6 +12,7 @@ const GlobalContextProvider = ({ children }) => {
     let getCurrentUser = async () => {
         try {
             let res = await axios.get('/api/auth/user');
+            console.log(res.data, 'res')
             if (res.status === 200) {
                 setUser(res.data)
                 setIsLogin(true);
@@ -27,7 +28,7 @@ const GlobalContextProvider = ({ children }) => {
 
     useEffect(() => {
         getCurrentUser()
-    }, [])
+    }, [isLogin])
 
     return (
         <GlobalContext.Provider value={{ user, isLogin, setUser, setIsLogin }}>
