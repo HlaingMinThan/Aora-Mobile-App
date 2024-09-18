@@ -10,6 +10,7 @@ const Profile = () => {
     let { videos, getVideos, isLoading } = useAllVideos();
 
     let logout = () => {
+        //call logout api to delete token
         setItem("token", "");
         setUser(null);
         setIsLogin(false);

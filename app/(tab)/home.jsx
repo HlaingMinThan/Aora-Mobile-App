@@ -8,12 +8,27 @@ import VideoCard from '@/components/VideoCard';
 import { useAllVideos } from '@/hooks/useVideoData';
 import axios from '@/lib/axios'
 import useAuthUser from '@/hooks/useAuthUser';
+import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 
 const Home = () => {
     let { videos, getVideos, isLoading } = useAllVideos();
     let [trendingVideos, setTrendingVideos] = useState([]);
     let { user } = useAuthUser();
-    // let { trendingVideos } = useTrendings();
+    let { videoId } = useLocalSearchParams();
+
+    //handle after created
+    useFocusEffect(
+        useCallback(() => {
+            if (videoId) {
+                getVideos();
+                getTrendings();
+            }
+
+            return () => {
+                console.log('This route is now unfocused.');
+            }
+        }, [getVideos, getTrendings, videoId])
+    )
 
     let getTrendings = useCallback(async () => {
         let res = await axios.get(`/api/videos/trending`);

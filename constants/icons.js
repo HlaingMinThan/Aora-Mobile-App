@@ -9,6 +9,7 @@ import upload from "../assets/icons/upload.png";
 import rightArrow from "../assets/icons/right-arrow.png";
 import logout from "../assets/icons/logout.png";
 import eyeHide from "../assets/icons/eye-hide.png";
+import close from "../assets/icons/close.png";
 import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 
@@ -26,4 +27,5 @@ export default {
   logout,
   eyeHide,
   eye,
+  close
 };
