@@ -14,7 +14,7 @@ import Modal from "react-native-modal";
 
 const Create = () => {
     const [loading, setLoading] = useState(false);
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const [image, setImage] = useState(null);
     const [video, setVideo] = useState(null);
 
@@ -47,7 +47,6 @@ const Create = () => {
             return null;
         }
     }
-
 
     const pickMediaAsync = async (type) => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -102,9 +101,9 @@ const Create = () => {
         <SafeAreaView className="bg-primary h-full">
             <ScrollView className="px-4">
                 <Modal isVisible={showModal} onBackdropPress={() => setShowModal(false)}>
-                    <View className="justify-center items-center min-h-24 p-4 bg-gray-50 rounded-xl">
-                        <Text className="text-center text-lg font-bold">Please Fill All The Fields</Text>
-                        <Text className="text-center text-sm mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde provident adipisci ipsam numquam facilis consequuntur, molestiae laudantium dolore eligendi, esse aperiam qui aliquid asperiores perferendis tempora expedita mollitia hic doloremque.</Text>
+                    <View className="justify-center items-center min-h-24 p-5 bg-primary rounded-xl">
+                        <Text className="text-center text-lg font-bold text-white">Please Fill All The Fields</Text>
+                        <Text className="text-center text-sm mt-3 text-gray-100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde provident adipisci ipsam numquam facilis consequuntur, molestiae laudantium dolore eligendi, esse aperiam qui aliquid asperiores perferendis tempora expedita mollitia hic doloremque.</Text>
                     </View>
                 </Modal>
                 <Text className="mt-4 text-white font-bold text-2xl">Upload Video</Text>
@@ -125,7 +124,8 @@ const Create = () => {
                                     <Image source={icons.upload} className="w-1/2 h-1/2" resizeMode='contain' />
                                 </View>
                             </View>
-                        </TouchableOpacity>)}
+                        </TouchableOpacity>
+                    )}
                 </View>
                 <View className="mt-7 juce">
                     <Text className="text-base text-gray-100 font-pmedium">Upload Thumbnail</Text>
