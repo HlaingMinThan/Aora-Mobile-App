@@ -1,4 +1,4 @@
-import { Alert, Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
@@ -9,6 +9,7 @@ import axios from '@/lib/axios';
 import VideoPlayer from '@/components/VideoPlayer';
 import { router } from 'expo-router';
 import Modal from "react-native-modal";
+import { getItem } from 'expo-secure-store';
 
 
 
@@ -38,6 +39,7 @@ const Create = () => {
             let res = await axios.post('/api/images', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${await getItem('token')}`
                 },
             })
 
@@ -79,7 +81,11 @@ const Create = () => {
                 setShowModal(true)
             }
             setLoading(true);
-            let res = await axios.post('/api/videos', form);
+            let res = await axios.post('/api/videos', form, {
+                headers: {
+                    'Authorization': `Bearer ${await getItem('token')}`
+                }
+            });
             if (res.status === 200) {
                 setLoading(false);
                 setForm({

@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { getItem, setItem } from 'expo-secure-store';
 import useAuthUser from '@/hooks/useAuthUser';
 import ReusableProfile from '@/components/ReusableProfile';
@@ -9,6 +9,10 @@ const Profile = () => {
 
     let { setUser, setIsLogin, user } = useAuthUser()
     let { videos, getVideos, isLoading } = useAllVideos("", user?.id);
+
+    useFocusEffect(() => {
+        getVideos();
+    })
 
     let logout = async () => {
         try {
