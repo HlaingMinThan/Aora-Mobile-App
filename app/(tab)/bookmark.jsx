@@ -10,8 +10,7 @@ import { useFocusEffect } from 'expo-router';
 
 const BookMark = () => {
     let { user } = useAuthUser();
-    console.log('user',user)
-    let { videos, getVideos, isLoading } = useAllVideos("", user?.id, true);
+    let { videos, getVideos, isLoading } = useAllVideos(`/api/users/${user?.id}/bookmarks`);
 
     useFocusEffect(useCallback(() => {
         getVideos();
@@ -33,7 +32,7 @@ const BookMark = () => {
                             <Image source={images.logoSmall} resizeMode='contain' className="w-9 h-10" />
                         </View>
                         <View className="mt-10">
-                            <SearchInput />
+                            <SearchInput searchFromBookmark={true} />
                         </View>
                     </View>
                 }

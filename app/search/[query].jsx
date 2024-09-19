@@ -1,15 +1,18 @@
-import { SafeAreaView, Text, View, FlatList, Image, ActivityIndicator } from 'react-native'
-import React, { useEffect } from 'react'
+import { SafeAreaView, Text, View, FlatList, ActivityIndicator } from 'react-native'
+import React from 'react'
 import { useLocalSearchParams } from 'expo-router'
-import { images } from '@/constants';
 import SearchInput from '@/components/SearchInput';
 import EmptyState from '@/components/EmptyState';
 import VideoCard from '@/components/VideoCard';
 import { useAllVideos } from '@/hooks/useVideoData';
+import useAuthUser from '@/hooks/useAuthUser';
 
 const Search = () => {
-    let { query } = useLocalSearchParams();
-    let { videos, isLoading } = useAllVideos(query);
+    let { query, searchFromBookmark } = useLocalSearchParams();
+    let { user } = useAuthUser();
+    let url = searchFromBookmark ? `/api/users/${user?.id}/bookmarks` : `/api/videos`
+    console.log(searchFromBookmark)
+    let { videos, isLoading } = useAllVideos(url + `${query ? '?query=' + query : ''}`);
 
     return (
         <SafeAreaView className="bg-primary h-full">
@@ -27,7 +30,7 @@ const Search = () => {
                                 </View>
                             </View>
                             <View className="my-10">
-                                <SearchInput initialSearch={query} />
+                                <SearchInput initialSearch={query} searchFromBookmark={searchFromBookmark ?? false} />
                             </View>
                         </View>
                     }

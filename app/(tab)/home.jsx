@@ -11,7 +11,7 @@ import useAuthUser from '@/hooks/useAuthUser';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 
 const Home = () => {
-    let { videos, getVideos, isLoading } = useAllVideos();
+    let { videos, getVideos, isLoading } = useAllVideos("/api/videos");
     let [trendingVideos, setTrendingVideos] = useState([]);
     let { user } = useAuthUser();
     let { videoId } = useLocalSearchParams();
