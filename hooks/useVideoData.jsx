@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import axios from '@/lib/axios'
+import { getItem } from 'expo-secure-store';
 
 let useAllVideos = (query = "", userId, getBookMark = false) => {
     let [videos, setVideos] = useState([]);
@@ -7,21 +8,31 @@ let useAllVideos = (query = "", userId, getBookMark = false) => {
     let [isLoading, setIsLoading] = useState(videos.length ? false : true);
 
     let getVideos = useCallback(async () => {
-        let url;
-        if (userId) {
-            if (getBookMark) {
-                url = `/api/users/${userId}/bookmarks`;//user bookmarked videos
+        try {
+            let url;
+            if (userId) {
+                if (getBookMark) {
+                    url = `/api/users/${userId}/bookmarks`;//user bookmarked videos
+                } else {
+                    url = `/api/users/${userId}/videos`;//user created videos
+                }
             } else {
-                url = `/api/users/${userId}/videos`;//user created videos
+                url = `/api/videos${query ? '?query=' + query : ''}`;
             }
-        } else {
-            url = `/api/videos${query ? '?query=' + query : ''}`;
+            let token = await getItem("token");
+            if (token) {
+                let res = await axios.get(url, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                let videos = res.data.data;
+                setIsLoading(false);
+                setVideos(videos);
+            }
+        } catch (e) {
+            console.log(e, 'error on getVideos')
         }
-
-        let res = await axios.get(url);
-        let videos = res.data.data;
-        setIsLoading(false);
-        setVideos(videos);
     }, [query, userId, getBookMark]);
 
     useEffect(() => {

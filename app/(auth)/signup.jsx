@@ -16,7 +16,7 @@ const SignUp = () => {
         email: "",
         password: ""
     })
-    let { setIsLogin } = useAuthUser();
+    let { getCurrentUser } = useAuthUser();
     let [isLoading, setIsLoading] = useState(false);
 
     const submit = async () => {
@@ -34,8 +34,8 @@ const SignUp = () => {
                 device_name
             })
 
-            setItem("token", res.data)
-            setIsLogin(true);
+
+            await getCurrentUser(res.data);
             if (res.status === 200) {
                 setIsLoading(false);
                 router.push("/home");

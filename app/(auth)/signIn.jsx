@@ -25,8 +25,7 @@ const SignIn = () => {
             setIsLoading(true);
             if (res.status === 200) {
                 setIsLoading(false);
-                setItem("token", res.data);
-                await getCurrentUser();
+                await getCurrentUser(res.data);
                 router.replace("/home");
             }
         } catch (e) {

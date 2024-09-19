@@ -1,20 +1,34 @@
 import { router } from 'expo-router';
-import { setItem } from 'expo-secure-store';
+import { getItem, setItem } from 'expo-secure-store';
 import useAuthUser from '@/hooks/useAuthUser';
 import ReusableProfile from '@/components/ReusableProfile';
 import { useAllVideos } from '@/hooks/useVideoData';
+import axios from 'axios';
 
 const Profile = () => {
 
     let { setUser, setIsLogin, user } = useAuthUser()
     let { videos, getVideos, isLoading } = useAllVideos("", user?.id);
 
-    let logout = () => {
-        //call logout api to delete token
-        setItem("token", "");
-        setUser(null);
-        setIsLogin(false);
-        router.navigate("/");
+    let logout = async () => {
+        try {
+            //call logout api to delete token
+            let token = await getItem("token");
+            let res = await axios.post('/api/auth/logout', {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(res.data)
+            if (res.status === 200) {
+                setItem("token", "");
+                setUser(null);
+                setIsLogin(false);
+            }
+            router.navigate("/");
+        } catch (e) {
+            console.log('error on logout', e.response)
+        }
     }
 
     return (
