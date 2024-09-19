@@ -8,7 +8,7 @@ import axios from 'axios';
 const Profile = () => {
 
     let { setUser, setIsLogin, user } = useAuthUser()
-    let { videos, getVideos, isLoading } = useAllVideos("", user?.id);
+    let { videos, getVideos, isLoading } = useAllVideos( `/api/users/${user?.id}/videos`);
 
     useFocusEffect(() => {
         getVideos();
