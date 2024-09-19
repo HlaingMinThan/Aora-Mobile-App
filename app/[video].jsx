@@ -1,9 +1,10 @@
 import { View, Text, SafeAreaView, Image, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import VideoPlayer from '@/components/VideoPlayer';
 import CustomButton from '@/components/CustomButton';
 import { router, useLocalSearchParams } from 'expo-router';
 import axios from '@/lib/axios';
+import { getItem } from 'expo-secure-store';
 
 const Video = () => {
     let { video: videoObjString } = useLocalSearchParams();
@@ -11,20 +12,36 @@ const Video = () => {
     let [loading, setLoading] = useState(false);
     let [alreadyBookmarked, setAlreadyBookmarked] = useState(false);
 
-    useEffect(() => {
-        if (video) {
-            axios.get(`/api/videos/${video?.id}/check-bookmark`).then(res => {
+    let checkBookmark = useCallback(async () => {
+        try {
+            let token = await getItem("token");
+            let res = await axios.get(`/api/videos/${video?.id}/check-bookmark`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            if (res.status === 200) {
                 setAlreadyBookmarked(res.data.data);
-            }).catch((e) => {
-                console.log(e)
-            });
+            }
+        } catch (e) {
+            console.log(e, 'error on checkBookmark')
         }
     }, [video])
+
+    useEffect(() => {
+        if (video) {
+            checkBookmark()
+        }
+    }, [video, checkBookmark])
 
     let addToBookmark = async () => {
         try {
             setLoading(true);
-            let res = await axios.post(`/api/videos/${video?.id}/toggle-bookmarks`);
+            let res = await axios.post(`/api/videos/${video?.id}/toggle-bookmarks`, {}, {
+                headers: {
+                    Authorization: `Bearer ${await getItem("token")}`
+                }
+            });
             if (res.status === 200) {
                 router.navigate('/bookmark');
             }
