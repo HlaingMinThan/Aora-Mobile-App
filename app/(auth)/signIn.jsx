@@ -17,7 +17,7 @@ const SignIn = () => {
     })
 
     let [isLoading, setIsLoading] = useState(false);
-    let { setUser, setIsLogin } = useAuthUser();
+    let { getCurrentUser } = useAuthUser();
 
     const submit = async () => {
         try {
@@ -25,9 +25,8 @@ const SignIn = () => {
             setIsLoading(true);
             if (res.status === 200) {
                 setIsLoading(false);
-                setUser(res.data.user);
-                setIsLogin(true);
                 setItem("token", res.data);
+                await getCurrentUser();
                 router.replace("/home");
             }
         } catch (e) {

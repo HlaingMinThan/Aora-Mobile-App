@@ -28,10 +28,10 @@ const GlobalContextProvider = ({ children }) => {
 
     useEffect(() => {
         getCurrentUser()
-    }, [isLogin])
+    }, [])
 
     return (
-        <GlobalContext.Provider value={{ user, isLogin, setUser, setIsLogin }}>
+        <GlobalContext.Provider value={{ user, isLogin, setUser, setIsLogin, getCurrentUser }}>
             {children}
         </GlobalContext.Provider>
     )
