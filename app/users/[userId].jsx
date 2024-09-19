@@ -6,7 +6,7 @@ import { useAllVideos } from '@/hooks/useVideoData';
 
 const Profile = () => {
     let { userId } = useLocalSearchParams();
-    let { videos, getVideos, isLoading } = useAllVideos("", userId);
+    let { videos, getVideos, isLoading } = useAllVideos(`/api/users/${userId}/videos`);
     let [user, setUser] = useState(null)
 
     useEffect(() => {

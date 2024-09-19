@@ -15,7 +15,7 @@ const ReusableProfile = ({ handleLogout = null, user, isLoading, videos, refresh
             {!isLoading ? (<FlatList
                 keyExtractor={(item) => item.id}
                 data={videos}
-                renderItem={({ item }) => <VideoCard video={item} name={user?.name} />}
+                renderItem={({ item }) => <VideoCard video={item} name={user?.name} goToProfile={false} />}
                 ListHeaderComponent={
                     <View className={`w-full justify-center items-center mb-6  px-4 ${state.type === 'stack' ? 'space-y-10 mt-16' : ''}`}>
                         {(state.type === 'tab' && authUser?.id === user?.id) && <TouchableOpacity onPress={handleLogout} className="items-end w-full mb-10">
